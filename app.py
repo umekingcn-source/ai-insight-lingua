@@ -15,12 +15,26 @@ st.set_page_config(
 # --- 自定义样式 (参考 U-MEKING 风格) ---
 st.markdown("""
 <style>
-/* 导入 Google Fonts - 专业优雅的字体 */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+/* 导入 Google Fonts - 参考 U-MEKING 清晰现代的字体 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* 全局字体和颜色设置 */
+html, body, [class*="css"] {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #ffffff;
+}
 
 /* 全局样式 - 深色优雅背景 */
 .stApp {
-    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%);
+    background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+}
+
+/* 确保所有文字清晰可见 */
+.stMarkdown, .stMarkdown p, .stMarkdown li, .stMarkdown span {
+    color: #f0f0f0 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 1rem;
+    line-height: 1.7;
 }
 
 /* 主标题样式 - 金色渐变 */
@@ -29,32 +43,32 @@ st.markdown("""
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 2.5rem;
     font-weight: 700;
     text-align: center;
     margin-bottom: 0.5rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
-/* 副标题样式 */
+/* 副标题样式 - 更清晰 */
 .sub-header {
-    color: #9ca3af;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
+    color: #e0e0e0 !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
     text-align: center;
     margin-bottom: 2rem;
-    letter-spacing: 1px;
-    font-weight: 300;
+    letter-spacing: 0.5px;
+    font-weight: 400;
 }
 
 /* 卡片样式 - 深色玻璃态 */
 .news-card {
-    background: linear-gradient(145deg, rgba(26, 26, 26, 0.95), rgba(15, 15, 15, 0.98));
+    background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(20, 20, 20, 0.98));
     border-radius: 12px;
     padding: 1.5rem;
     margin: 1rem 0;
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.25);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -67,12 +81,17 @@ st.markdown("""
 
 /* 特色区块 - 金色边框 */
 .feature-box {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(170, 140, 44, 0.05));
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(170, 140, 44, 0.05));
     border-radius: 12px;
     padding: 1.5rem;
     margin: 1rem 0;
     border-left: 3px solid #d4af37;
     backdrop-filter: blur(10px);
+}
+
+.feature-box p, .feature-box li {
+    color: #e0e0e0 !important;
+    font-size: 1rem;
 }
 
 /* 成就徽章 - 金色主题 */
@@ -85,130 +104,163 @@ st.markdown("""
     display: inline-block;
     margin: 0.25rem;
     font-size: 0.85rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 /* 统计卡片 */
 .stat-card {
-    background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(170, 140, 44, 0.05));
+    background: linear-gradient(145deg, rgba(212, 175, 55, 0.12), rgba(170, 140, 44, 0.08));
     border-radius: 12px;
     padding: 1.2rem;
     text-align: center;
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 .stat-number {
     font-size: 2.2rem;
     font-weight: 700;
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Sans', sans-serif;
     background: linear-gradient(135deg, #d4af37, #f4e4bc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .stat-label {
-    color: #9ca3af;
-    font-size: 0.85rem;
+    color: #d0d0d0 !important;
+    font-size: 0.9rem;
     margin-top: 0.5rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 500;
 }
 
 /* 按钮样式 - 金色优雅 */
 .stButton > button {
     background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
-    color: #0a0a0a;
+    color: #0a0a0a !important;
     border: none;
     border-radius: 8px;
     padding: 0.75rem 2rem;
     font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-size: 0.9rem;
 }
 
 .stButton > button:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+    color: #0a0a0a !important;
 }
 
 /* 侧边栏样式 */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 100%);
-    border-right: 1px solid rgba(212, 175, 55, 0.1);
+    background: linear-gradient(180deg, #111111 0%, #1a1a1a 100%);
+    border-right: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 [data-testid="stSidebar"] .stMarkdown {
-    color: #e5e7eb;
+    color: #f0f0f0 !important;
+}
+
+[data-testid="stSidebar"] h4 {
+    color: #d4af37 !important;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
 }
 
 /* 输入框样式 */
 .stTextInput > div > div > input {
-    background: rgba(26, 26, 26, 0.9);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(30, 30, 30, 0.95) !important;
+    border: 1px solid rgba(212, 175, 55, 0.35) !important;
     border-radius: 8px;
-    color: #e5e7eb;
-    font-family: 'Source Sans Pro', sans-serif;
+    color: #ffffff !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
 }
 
 .stTextInput > div > div > input:focus {
-    border-color: #d4af37;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+}
+
+.stTextInput > div > div > input::placeholder {
+    color: #888888 !important;
 }
 
 .stTextArea > div > div > textarea {
-    background: rgba(26, 26, 26, 0.9);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(30, 30, 30, 0.95) !important;
+    border: 1px solid rgba(212, 175, 55, 0.35) !important;
     border-radius: 8px;
-    color: #e5e7eb;
-    font-family: 'Source Sans Pro', sans-serif;
+    color: #ffffff !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
 }
 
 .stTextArea > div > div > textarea:focus {
-    border-color: #d4af37;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+}
+
+.stTextArea > div > div > textarea::placeholder {
+    color: #888888 !important;
 }
 
 /* 选择框样式 */
 .stSelectbox > div > div {
-    background: rgba(26, 26, 26, 0.9);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(30, 30, 30, 0.95) !important;
+    border: 1px solid rgba(212, 175, 55, 0.35) !important;
     border-radius: 8px;
+}
+
+.stSelectbox > div > div > div {
+    color: #ffffff !important;
 }
 
 /* Tab 样式 */
 .stTabs [data-baseweb="tab-list"] {
     gap: 8px;
-    background: rgba(15, 15, 15, 0.8);
+    background: rgba(20, 20, 20, 0.9);
     border-radius: 10px;
     padding: 0.5rem;
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .stTabs [data-baseweb="tab"] {
     border-radius: 6px;
-    color: #9ca3af;
+    color: #d0d0d0 !important;
     font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
 }
 
 .stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg, #d4af37, #aa8c2c);
-    color: #0a0a0a;
+    background: linear-gradient(135deg, #d4af37, #aa8c2c) !important;
+    color: #0a0a0a !important;
 }
 
 /* Expander 样式 */
 .streamlit-expanderHeader {
-    background: rgba(26, 26, 26, 0.8);
+    background: rgba(30, 30, 30, 0.9) !important;
     border-radius: 8px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    font-family: 'Source Sans Pro', sans-serif;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    font-family: 'Inter', sans-serif;
+    color: #f0f0f0 !important;
+    font-size: 1rem;
 }
 
 .streamlit-expanderHeader:hover {
-    border-color: rgba(212, 175, 55, 0.4);
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+/* Expander 内容 */
+.streamlit-expanderContent {
+    background: rgba(25, 25, 25, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
 }
 
 /* Metric 样式 */
@@ -217,41 +269,42 @@ st.markdown("""
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 700;
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Sans', sans-serif;
 }
 
 /* 渐变分割线 - 金色 */
 .gradient-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6), transparent);
     margin: 1.5rem 0;
     border: none;
 }
 
-/* 引用样式 */
+/* 引用样式 - 更清晰 */
 .quote-box {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(170, 140, 44, 0.05));
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(170, 140, 44, 0.08));
     border-left: 3px solid #d4af37;
     padding: 1.2rem 1.5rem;
     border-radius: 0 10px 10px 0;
     font-style: italic;
-    color: #d1d5db;
-    font-family: 'Playfair Display', serif;
+    color: #e8e8e8 !important;
+    font-family: 'DM Sans', sans-serif;
     font-size: 1.1rem;
+    line-height: 1.6;
 }
 
 /* 标签样式 */
 .tag {
-    background: rgba(212, 175, 55, 0.15);
-    color: #d4af37;
-    padding: 0.3rem 0.8rem;
+    background: rgba(212, 175, 55, 0.2);
+    color: #d4af37 !important;
+    padding: 0.35rem 0.9rem;
     border-radius: 15px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     margin-right: 0.5rem;
     display: inline-block;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
 /* 品牌 Logo 区域 */
@@ -270,17 +323,17 @@ st.markdown("""
     background: linear-gradient(135deg, #d4af37, #f4e4bc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 3px;
     margin: 0;
 }
 
 .brand-subtitle {
-    color: #6b7280;
-    font-size: 0.75rem;
-    font-family: 'Montserrat', sans-serif;
+    color: #a0a0a0 !important;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-top: 0.3rem;
@@ -288,16 +341,16 @@ st.markdown("""
 
 /* 特性图标卡片 */
 .feature-icon-card {
-    background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.95));
+    background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(20, 20, 20, 0.98));
     border-radius: 12px;
     padding: 1.5rem;
     text-align: center;
-    border: 1px solid rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.2);
     transition: all 0.3s ease;
 }
 
 .feature-icon-card:hover {
-    border-color: rgba(212, 175, 55, 0.4);
+    border-color: rgba(212, 175, 55, 0.5);
     transform: translateY(-3px);
 }
 
@@ -307,32 +360,31 @@ st.markdown("""
 }
 
 .feature-title {
-    color: #d4af37;
-    font-family: 'Montserrat', sans-serif;
+    color: #d4af37 !important;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: 0.5rem;
 }
 
 .feature-desc {
-    color: #9ca3af;
-    font-size: 0.85rem;
-    font-family: 'Source Sans Pro', sans-serif;
-    line-height: 1.5;
+    color: #d0d0d0 !important;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
 }
 
 /* 底部信息 */
 .footer-text {
     text-align: center;
-    color: #6b7280;
-    font-size: 0.8rem;
-    font-family: 'Montserrat', sans-serif;
-    letter-spacing: 1px;
+    color: #a0a0a0 !important;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
 }
 
-.footer-text a {
-    color: #d4af37;
-    text-decoration: none;
+.footer-text strong {
+    color: #d4af37 !important;
 }
 
 /* 进度条颜色 */
@@ -347,23 +399,24 @@ st.markdown("""
 }
 
 ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: #0f0f0f;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.3);
+    background: rgba(212, 175, 55, 0.4);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(212, 175, 55, 0.5);
+    background: rgba(212, 175, 55, 0.6);
 }
 
 /* 信息提示框 */
 .stAlert {
-    background: rgba(26, 26, 26, 0.9);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: rgba(30, 30, 30, 0.95) !important;
+    border: 1px solid rgba(212, 175, 55, 0.25);
     border-radius: 8px;
+    color: #f0f0f0 !important;
 }
 
 /* 链接样式 */
@@ -375,6 +428,23 @@ a {
 
 a:hover {
     color: #f4e4bc !important;
+}
+
+/* 标签文字 */
+label {
+    color: #e0e0e0 !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+/* Spinner 文字 */
+.stSpinner > div {
+    color: #d4af37 !important;
+}
+
+/* 警告框文字 */
+.stWarning {
+    color: #f0f0f0 !important;
 }
 </style>
 """, unsafe_allow_html=True)
