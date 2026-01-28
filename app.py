@@ -1019,6 +1019,14 @@ with tab1:
     
     st.markdown("<br>", unsafe_allow_html=True)
     
+    # 初始化 session_state
+    if 'news_entries' not in st.session_state:
+        st.session_state.news_entries = []
+    if 'ai_analyses' not in st.session_state:
+        st.session_state.ai_analyses = {}
+    if 'current_feed' not in st.session_state:
+        st.session_state.current_feed = None
+    
     # 新闻源选择
     col_select, col_btn = st.columns([3, 1])
     with col_select:
@@ -1027,39 +1035,61 @@ with tab1:
         st.markdown("<br>", unsafe_allow_html=True)
         refresh_btn = st.button("🔄 刷新资讯", use_container_width=True)
     
-    if refresh_btn:
+    # 当切换新闻源或点击刷新时获取新数据
+    if refresh_btn or (st.session_state.current_feed != selected_feed and st.session_state.current_feed is not None):
         with st.spinner("🔍 正在获取最新资讯..."):
             feed = feedparser.parse(RSS_FEEDS[selected_feed])
+            st.session_state.news_entries = feed.entries[:5] if feed.entries else []
+            st.session_state.current_feed = selected_feed
+            # 清空之前的分析结果
+            st.session_state.ai_analyses = {}
+    
+    # 首次加载时自动获取
+    if not st.session_state.news_entries and st.session_state.current_feed is None:
+        st.session_state.current_feed = selected_feed
+        with st.spinner("🔍 正在加载资讯..."):
+            feed = feedparser.parse(RSS_FEEDS[selected_feed])
+            st.session_state.news_entries = feed.entries[:5] if feed.entries else []
+    
+    # 显示新闻列表
+    if not st.session_state.news_entries:
+        st.warning("暂无资讯，请点击刷新或选择其他新闻源")
+    else:
+        for idx, entry in enumerate(st.session_state.news_entries):
+            entry_key = f"entry_{idx}_{hash(entry.get('link', idx))}"
             
-            if not feed.entries:
-                st.warning("暂无资讯，请稍后重试或选择其他新闻源")
-            else:
-                for idx, entry in enumerate(feed.entries[:5]):
-                    st.markdown(f"""
-                    <div class="news-card">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span class="tag">#{idx+1}</span>
-                            <span style="color: #6b7280; font-size: 0.8rem; font-family: 'Montserrat', sans-serif;">
-                                📅 {entry.get('published', 'Unknown')[:25] if entry.get('published') else 'Unknown'}
-                            </span>
-                        </div>
-                    </div>
+            st.markdown(f"""
+            <div class="news-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="tag">#{idx+1}</span>
+                    <span style="color: #6b7280; font-size: 0.8rem; font-family: 'Montserrat', sans-serif;">
+                        📅 {entry.get('published', 'Unknown')[:25] if entry.get('published') else 'Unknown'}
+                    </span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            with st.expander(f"📰 {entry.title}", expanded=False):
+                st.markdown(f"**🔗 原文链接**: [点击跳转]({entry.link})")
+                
+                summary_text = entry.get('summary', entry.title)
+                st.info(summary_text[:500] + "..." if len(summary_text) > 500 else summary_text)
+                
+                # 使用唯一的按钮key
+                btn_key = f"btn_{idx}_{hash(entry.get('link', idx))}"
+                
+                if st.button("🧠 AI 深度解析", key=btn_key):
+                    with st.spinner("🤔 AI 正在思考..."):
+                        analysis = get_ai_summary(summary_text, api_key)
+                        st.session_state.ai_analyses[entry_key] = analysis
+                
+                # 显示已保存的分析结果
+                if entry_key in st.session_state.ai_analyses:
+                    st.markdown("""
+                    <div class="feature-box">
                     """, unsafe_allow_html=True)
-                    
-                    with st.expander(f"📰 {entry.title}", expanded=False):
-                        st.markdown(f"**🔗 原文链接**: [点击跳转]({entry.link})")
-                        
-                        summary_text = entry.get('summary', entry.title)
-                        st.info(summary_text[:500] + "..." if len(summary_text) > 500 else summary_text)
-                        
-                        if st.button("🧠 AI 深度解析", key=f"btn_{entry.link}"):
-                            with st.spinner("🤔 AI 正在思考..."):
-                                analysis = get_ai_summary(summary_text, api_key)
-                                st.markdown("""
-                                <div class="feature-box">
-                                """, unsafe_allow_html=True)
-                                st.markdown(analysis)
-                                st.markdown("</div>", unsafe_allow_html=True)
+                    st.markdown(st.session_state.ai_analyses[entry_key])
+                    st.markdown("</div>", unsafe_allow_html=True)
 
 with tab2:
     # Tab 横幅
