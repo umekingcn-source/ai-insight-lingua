@@ -12,299 +12,395 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- 自定义样式 ---
+# --- 自定义样式 (参考 U-MEKING 风格) ---
 st.markdown("""
 <style>
-/* 导入 Google Fonts - 使用更有特色的字体 */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* 导入 Google Fonts - 专业优雅的字体 */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
 
-/* 全局样式 */
+/* 全局样式 - 深色优雅背景 */
 .stApp {
-    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%);
 }
 
-/* 主标题样式 */
+/* 主标题样式 - 金色渐变 */
 .main-header {
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background: linear-gradient(135deg, #d4af37 0%, #f4e4bc 25%, #d4af37 50%, #aa8c2c 75%, #d4af37 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-family: 'Outfit', sans-serif;
-    font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
     font-weight: 700;
     text-align: center;
     margin-bottom: 0.5rem;
-    animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-    from { filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.5)); }
-    to { filter: drop-shadow(0 0 20px rgba(240, 147, 251, 0.8)); }
+    letter-spacing: 2px;
 }
 
 /* 副标题样式 */
 .sub-header {
-    color: #a0aec0;
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.1rem;
+    color: #9ca3af;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
     text-align: center;
     margin-bottom: 2rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    font-weight: 300;
 }
 
-/* 卡片样式 */
+/* 卡片样式 - 深色玻璃态 */
 .news-card {
-    background: linear-gradient(145deg, rgba(45, 55, 72, 0.9), rgba(26, 32, 44, 0.95));
-    border-radius: 16px;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-}
-
-.news-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(240, 147, 251, 0.6);
-    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
-}
-
-/* 特色区块 */
-.feature-box {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+    background: linear-gradient(145deg, rgba(26, 26, 26, 0.95), rgba(15, 15, 15, 0.98));
     border-radius: 12px;
     padding: 1.5rem;
     margin: 1rem 0;
-    border-left: 4px solid #667eea;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 成就徽章 */
+.news-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 15px 50px rgba(212, 175, 55, 0.1);
+}
+
+/* 特色区块 - 金色边框 */
+.feature-box {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(170, 140, 44, 0.05));
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-left: 3px solid #d4af37;
+    backdrop-filter: blur(10px);
+}
+
+/* 成就徽章 - 金色主题 */
 .achievement-badge {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-    color: white;
-    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #d4af37, #aa8c2c);
+    color: #0a0a0a;
+    padding: 0.4rem 1rem;
     border-radius: 20px;
     font-weight: 600;
     display: inline-block;
     margin: 0.25rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* 统计卡片 */
 .stat-card {
-    background: linear-gradient(145deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+    background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(170, 140, 44, 0.05));
     border-radius: 12px;
-    padding: 1rem;
+    padding: 1.2rem;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .stat-number {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    background: linear-gradient(90deg, #667eea, #f093fb);
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, #d4af37, #f4e4bc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .stat-label {
-    color: #a0aec0;
-    font-size: 0.9rem;
+    color: #9ca3af;
+    font-size: 0.85rem;
     margin-top: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
 }
 
-/* 按钮样式 */
+/* 按钮样式 - 金色优雅 */
 .stButton > button {
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
+    color: #0a0a0a;
     border: none;
-    border-radius: 25px;
+    border-radius: 8px;
     padding: 0.75rem 2rem;
     font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .stButton > button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
 }
 
 /* 侧边栏样式 */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    background: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 100%);
+    border-right: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 [data-testid="stSidebar"] .stMarkdown {
-    color: #e2e8f0;
+    color: #e5e7eb;
 }
 
 /* 输入框样式 */
 .stTextInput > div > div > input {
-    background: rgba(45, 55, 72, 0.8);
-    border: 1px solid rgba(102, 126, 234, 0.5);
-    border-radius: 10px;
-    color: white;
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    color: #e5e7eb;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.stTextInput > div > div > input:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
 }
 
 .stTextArea > div > div > textarea {
-    background: rgba(45, 55, 72, 0.8);
-    border: 1px solid rgba(102, 126, 234, 0.5);
-    border-radius: 10px;
-    color: white;
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    color: #e5e7eb;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.stTextArea > div > div > textarea:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
 }
 
 /* 选择框样式 */
 .stSelectbox > div > div {
-    background: rgba(45, 55, 72, 0.8);
-    border: 1px solid rgba(102, 126, 234, 0.5);
-    border-radius: 10px;
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
 }
 
 /* Tab 样式 */
 .stTabs [data-baseweb="tab-list"] {
     gap: 8px;
-    background: rgba(26, 32, 44, 0.5);
-    border-radius: 12px;
+    background: rgba(15, 15, 15, 0.8);
+    border-radius: 10px;
     padding: 0.5rem;
+    border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .stTabs [data-baseweb="tab"] {
-    border-radius: 8px;
-    color: #a0aec0;
+    border-radius: 6px;
+    color: #9ca3af;
     font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .stTabs [aria-selected="true"] {
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    color: white;
+    background: linear-gradient(135deg, #d4af37, #aa8c2c);
+    color: #0a0a0a;
 }
 
 /* Expander 样式 */
 .streamlit-expanderHeader {
-    background: rgba(45, 55, 72, 0.6);
-    border-radius: 10px;
-    border: 1px solid rgba(102, 126, 234, 0.3);
+    background: rgba(26, 26, 26, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.streamlit-expanderHeader:hover {
+    border-color: rgba(212, 175, 55, 0.4);
 }
 
 /* Metric 样式 */
 [data-testid="stMetricValue"] {
-    background: linear-gradient(90deg, #667eea, #f093fb);
+    background: linear-gradient(135deg, #d4af37, #f4e4bc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 700;
+    font-family: 'Playfair Display', serif;
 }
 
-/* 装饰性元素 */
-.decoration-circle {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    opacity: 0.1;
-}
-
-.circle-1 {
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, #667eea, transparent);
-    top: 10%;
-    right: 5%;
-}
-
-.circle-2 {
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, #f093fb, transparent);
-    bottom: 20%;
-    left: 10%;
-}
-
-/* 图标动画 */
-.animated-icon {
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
-}
-
-/* 渐变分割线 */
+/* 渐变分割线 - 金色 */
 .gradient-divider {
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #667eea, #f093fb, #667eea, transparent);
-    margin: 2rem 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+    margin: 1.5rem 0;
     border: none;
 }
 
 /* 引用样式 */
 .quote-box {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
-    border-left: 4px solid #f093fb;
-    padding: 1rem 1.5rem;
-    border-radius: 0 12px 12px 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(170, 140, 44, 0.05));
+    border-left: 3px solid #d4af37;
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 10px 10px 0;
     font-style: italic;
-    color: #cbd5e0;
+    color: #d1d5db;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
 }
 
 /* 标签样式 */
 .tag {
-    background: rgba(102, 126, 234, 0.3);
-    color: #a0aec0;
-    padding: 0.25rem 0.75rem;
+    background: rgba(212, 175, 55, 0.15);
+    color: #d4af37;
+    padding: 0.3rem 0.8rem;
     border-radius: 15px;
     font-size: 0.8rem;
     margin-right: 0.5rem;
     display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
-/* 加载动画 */
-.loading-wave {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
+/* 品牌 Logo 区域 */
+.brand-logo {
+    text-align: center;
+    padding: 1.5rem 0;
 }
 
-.loading-wave span {
+.brand-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+}
+
+.brand-title {
+    background: linear-gradient(135deg, #d4af37, #f4e4bc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+.brand-subtitle {
+    color: #6b7280;
+    font-size: 0.75rem;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+}
+
+/* 特性图标卡片 */
+.feature-icon-card {
+    background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.95));
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    transition: all 0.3s ease;
+}
+
+.feature-icon-card:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    transform: translateY(-3px);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+}
+
+.feature-title {
+    color: #d4af37;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-desc {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 1.5;
+}
+
+/* 底部信息 */
+.footer-text {
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.8rem;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+}
+
+.footer-text a {
+    color: #d4af37;
+    text-decoration: none;
+}
+
+/* 进度条颜色 */
+.stProgress > div > div > div > div {
+    background: linear-gradient(90deg, #d4af37, #aa8c2c);
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-    background: #667eea;
-    border-radius: 50%;
-    animation: wave 1s infinite ease-in-out;
 }
 
-.loading-wave span:nth-child(2) { animation-delay: 0.1s; }
-.loading-wave span:nth-child(3) { animation-delay: 0.2s; }
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
 
-@keyframes wave {
-    0%, 100% { transform: scaleY(1); }
-    50% { transform: scaleY(2); }
+::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.5);
+}
+
+/* 信息提示框 */
+.stAlert {
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+}
+
+/* 链接样式 */
+a {
+    color: #d4af37 !important;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #f4e4bc !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # --- 侧边栏配置 ---
 with st.sidebar:
-    # Logo 和标题
+    # Logo 和标题 - U-MEKING 风格
     st.markdown("""
-    <div style="text-align: center; padding: 1rem 0;">
-        <div style="font-size: 3rem; margin-bottom: 0.5rem;">🧠</div>
-        <h2 style="background: linear-gradient(90deg, #667eea, #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0;">AI Lingua</h2>
+    <div class="brand-logo">
+        <div class="brand-icon">🧠</div>
+        <h2 class="brand-title">AI LINGUA</h2>
+        <p class="brand-subtitle">Insight & Growth</p>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
     
     # API Key 输入
-    st.markdown("### 🔑 API 配置")
+    st.markdown("#### 🔑 API 配置")
     default_key = st.secrets.get("GEMINI_API_KEY", "")
     api_key = st.text_input("Gemini API Key", value=default_key, type="password")
     
     st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
     
     # 今日成就
-    st.markdown("### 🏆 今日成就")
+    st.markdown("#### 🏆 今日成就")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -336,18 +432,18 @@ with st.sidebar:
     st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
     
     # 学习趋势
-    st.markdown("### 📈 本周趋势")
+    st.markdown("#### 📈 本周趋势")
     chart_data = pd.DataFrame({
         'Day': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
         'Words': [10, 15, 12, 18, 8]
     })
-    st.bar_chart(chart_data.set_index('Day'), color="#667eea")
+    st.bar_chart(chart_data.set_index('Day'), color="#d4af37")
     
     # 底部信息
     st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
     st.markdown("""
-    <div style="text-align: center; color: #718096; font-size: 0.8rem;">
-        <p>Powered by Gemini AI</p>
+    <div class="footer-text">
+        <p>Powered by <strong>Gemini AI</strong></p>
         <p>© 2026 AI Lingua Dashboard</p>
     </div>
     """, unsafe_allow_html=True)
@@ -420,7 +516,7 @@ def prompt_coach(user_prompt, api_key):
 # --- 主界面 ---
 # 主标题
 st.markdown("""
-<h1 class="main-header">🚀 AI Insight & Lingua Dashboard</h1>
+<h1 class="main-header">✦ AI Insight & Lingua Dashboard ✦</h1>
 """, unsafe_allow_html=True)
 
 # 副标题
@@ -431,7 +527,7 @@ st.markdown("""
 # 引用框
 st.markdown("""
 <div class="quote-box">
-    💡 "The only way to do great work is to love what you do." — Steve Jobs
+    "The only way to do great work is to love what you do." — Steve Jobs
 </div>
 """, unsafe_allow_html=True)
 
@@ -441,27 +537,30 @@ st.markdown("<br>", unsafe_allow_html=True)
 tab1, tab2 = st.tabs(["📰 资讯与英语学习", "💪 Prompt 练兵场"])
 
 with tab1:
-    # 功能介绍
+    # 功能介绍 - 三栏布局
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("""
-        <div class="feature-box">
-            <h4>📖 阅读原文</h4>
-            <p style="color: #a0aec0; font-size: 0.9rem;">获取最新 AI 科技资讯，提升英语阅读能力</p>
+        <div class="feature-icon-card">
+            <div class="feature-icon">📖</div>
+            <div class="feature-title">阅读原文</div>
+            <div class="feature-desc">获取最新 AI 科技资讯<br>提升英语阅读能力</div>
         </div>
         """, unsafe_allow_html=True)
     with col2:
         st.markdown("""
-        <div class="feature-box">
-            <h4>🧠 AI 解析</h4>
-            <p style="color: #a0aec0; font-size: 0.9rem;">Gemini AI 深度分析，洞察行业趋势</p>
+        <div class="feature-icon-card">
+            <div class="feature-icon">🧠</div>
+            <div class="feature-title">AI 解析</div>
+            <div class="feature-desc">Gemini AI 深度分析<br>洞察行业趋势</div>
         </div>
         """, unsafe_allow_html=True)
     with col3:
         st.markdown("""
-        <div class="feature-box">
-            <h4>📚 词汇学习</h4>
-            <p style="color: #a0aec0; font-size: 0.9rem;">提取核心术语，建立专业词汇库</p>
+        <div class="feature-icon-card">
+            <div class="feature-icon">📚</div>
+            <div class="feature-title">词汇学习</div>
+            <div class="feature-desc">提取核心术语<br>建立专业词汇库</div>
         </div>
         """, unsafe_allow_html=True)
     
@@ -487,7 +586,7 @@ with tab1:
                     <div class="news-card">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span class="tag">#{idx+1}</span>
-                            <span style="color: #718096; font-size: 0.8rem;">
+                            <span style="color: #6b7280; font-size: 0.8rem; font-family: 'Montserrat', sans-serif;">
                                 📅 {entry.get('published', 'Unknown')[:25] if entry.get('published') else 'Unknown'}
                             </span>
                         </div>
@@ -513,9 +612,9 @@ with tab2:
     # 功能介绍
     st.markdown("""
     <div class="feature-box">
-        <h3>🎯 Prompt 练兵场</h3>
-        <p style="color: #a0aec0;">在这里输入你想问 AI 的英文指令，AI 导师会：</p>
-        <ul style="color: #a0aec0;">
+        <h3 style="color: #d4af37; font-family: 'Playfair Display', serif; margin-bottom: 1rem;">🎯 Prompt 练兵场</h3>
+        <p style="color: #9ca3af; font-family: 'Source Sans Pro', sans-serif;">在这里输入你想问 AI 的英文指令，AI 导师会：</p>
+        <ul style="color: #9ca3af; font-family: 'Source Sans Pro', sans-serif; line-height: 1.8;">
             <li>✏️ 点评你的 Prompt 中的语法和逻辑问题</li>
             <li>✨ 给出优化后的专业版本</li>
             <li>🤖 执行你的指令并给出回答</li>
@@ -529,7 +628,7 @@ with tab2:
     st.markdown("""
     <div style="margin-bottom: 1rem;">
         <span class="tag">💡 示例</span>
-        <span style="color: #a0aec0; font-size: 0.9rem;">
+        <span style="color: #9ca3af; font-size: 0.9rem; font-family: 'Source Sans Pro', sans-serif;">
             Explain Quantum Computing to a 5 year old
         </span>
     </div>
@@ -560,7 +659,7 @@ with tab2:
 # 底部装饰
 st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
 st.markdown("""
-<div style="text-align: center; color: #718096; padding: 1rem;">
-    <p>🚀 Built with Streamlit | 🤖 Powered by Google Gemini | 💜 Made with Love</p>
+<div class="footer-text">
+    <p>✦ Built with <strong>Streamlit</strong> | Powered by <strong>Google Gemini</strong> | Crafted with Passion ✦</p>
 </div>
 """, unsafe_allow_html=True)
