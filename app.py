@@ -3,6 +3,7 @@ import feedparser
 import google.generativeai as genai
 import pandas as pd
 import datetime
+import time
 
 # --- 配置页面 ---
 st.set_page_config(
@@ -880,6 +881,36 @@ RSS_FEEDS = {
 }
 
 # --- 核心函数 ---
+def call_gemini_with_retry(model, prompt, max_retries=3):
+    """带重试机制的 Gemini API 调用"""
+    for attempt in range(max_retries):
+        try:
+            response = model.generate_content(prompt)
+            return response.text, None
+        except Exception as e:
+            error_str = str(e)
+            # 处理配额限制错误
+            if "429" in error_str or "quota" in error_str.lower() or "rate" in error_str.lower():
+                if attempt < max_retries - 1:
+                    wait_time = 15 * (attempt + 1)  # 递增等待时间
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    return None, f"""
+⚠️ **API 配额已用尽**
+
+您的 Gemini API 免费配额已达到限制。请尝试以下解决方案：
+
+1. **稍后重试** - 等待 1-2 分钟后再次点击分析按钮
+2. **升级 API** - 访问 [Google AI Studio](https://aistudio.google.com/) 升级您的 API 计划
+3. **更换 API Key** - 在侧边栏输入新的 API Key
+
+💡 **提示**: 免费层每分钟有请求限制，建议每次分析后等待几秒钟再进行下一次分析。
+"""
+            else:
+                return None, f"AI 调用出错: {e}"
+    return None, "重试次数已用尽，请稍后再试"
+
 def get_ai_summary(text, api_key):
     if not api_key:
         return "请先在侧边栏输入 API Key"
@@ -897,11 +928,10 @@ def get_ai_summary(text, api_key):
     3. **【难度】**：给这篇英文的阅读难度打分（1-5星）。
     """
     
-    try:
-        response = model.generate_content(prompt)
-        return response.text
-    except Exception as e:
-        return f"AI 调用出错: {e}"
+    result, error = call_gemini_with_retry(model, prompt)
+    if error:
+        return error
+    return result
 
 def prompt_coach(user_prompt, api_key):
     if not api_key:
@@ -930,11 +960,10 @@ def prompt_coach(user_prompt, api_key):
     
     full_prompt = f"{system_prompt}\n\n用户输入的 Prompt：\n{user_prompt}"
     
-    try:
-        response = model.generate_content(full_prompt)
-        return response.text
-    except Exception as e:
-        return str(e)
+    result, error = call_gemini_with_retry(model, full_prompt)
+    if error:
+        return error
+    return result
 
 # --- 主界面 ---
 
