@@ -446,7 +446,270 @@ label {
 .stWarning {
     color: #f0f0f0 !important;
 }
+
+/* Hero 横幅区域 */
+.hero-section {
+    position: relative;
+    background: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&h=400&fit=crop') center/cover no-repeat;
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.85) 0%, rgba(26, 26, 26, 0.75) 50%, rgba(15, 15, 15, 0.85) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+/* 装饰图片 */
+.decorative-img {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.decorative-img:hover {
+    transform: scale(1.02);
+    border-color: rgba(212, 175, 55, 0.6);
+}
+
+.decorative-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+.decorative-img:hover img {
+    filter: brightness(1);
+}
+
+/* 引用框图标 */
+.quote-icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+    vertical-align: middle;
+}
+
+/* 特性卡片带图片 */
+.feature-card-with-img {
+    background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(20, 20, 20, 0.98));
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.feature-card-with-img:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 20px 60px rgba(212, 175, 55, 0.15);
+}
+
+.feature-card-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    filter: brightness(0.8);
+    transition: filter 0.3s ease;
+}
+
+.feature-card-with-img:hover .feature-card-img {
+    filter: brightness(1);
+}
+
+.feature-card-content {
+    padding: 1.2rem;
+    text-align: center;
+}
+
+/* 侧边栏图片 */
+.sidebar-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1rem 0;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 新闻配图 */
+.news-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* 浮动装饰元素 */
+.floating-decoration {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.floating-decoration.top-right {
+    top: 10%;
+    right: -100px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-decoration.bottom-left {
+    bottom: 10%;
+    left: -100px;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Tab 面板图片横幅 */
+.tab-banner {
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.tab-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(15, 15, 15, 0.9) 0%, rgba(15, 15, 15, 0.3) 100%);
+}
+
+.tab-banner-content {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tab-banner-title {
+    color: #d4af37 !important;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.tab-banner-subtitle {
+    color: #e0e0e0 !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+}
+
+/* 图片画廊样式 */
+.image-gallery {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.gallery-item {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    filter: brightness(0.85);
+    transition: filter 0.3s ease;
+}
+
+.gallery-item:hover img {
+    filter: brightness(1);
+}
+
+/* 装饰线条 */
+.decorative-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+    margin: 2rem 0;
+}
+
+/* 侧边栏励志图片 */
+.motivation-section {
+    background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(20, 20, 20, 0.98));
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.motivation-img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+}
+
+.motivation-text {
+    color: #e0e0e0 !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    text-align: center;
+    font-style: italic;
+}
 </style>
+""", unsafe_allow_html=True)
+
+# 添加浮动装饰元素
+st.markdown("""
+<div class="floating-decoration top-right"></div>
+<div class="floating-decoration bottom-left"></div>
 """, unsafe_allow_html=True)
 
 # --- 侧边栏配置 ---
@@ -457,6 +720,13 @@ with st.sidebar:
         <div class="brand-icon">🧠</div>
         <h2 class="brand-title">AI LINGUA</h2>
         <p class="brand-subtitle">Insight & Growth</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # 侧边栏装饰图片
+    st.markdown("""
+    <div class="sidebar-image">
+        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=300&h=150&fit=crop" alt="AI Brain" />
     </div>
     """, unsafe_allow_html=True)
     
@@ -508,6 +778,17 @@ with st.sidebar:
         'Words': [10, 15, 12, 18, 8]
     })
     st.bar_chart(chart_data.set_index('Day'), color="#d4af37")
+    
+    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    
+    # 每日激励 - 带图片
+    st.markdown("#### 💡 每日激励")
+    st.markdown("""
+    <div class="motivation-section">
+        <img class="motivation-img" src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=300&h=120&fit=crop" alt="Learning" />
+        <p class="motivation-text">"Stay hungry, stay foolish."<br>— Steve Jobs</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     # 底部信息
     st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
@@ -584,22 +865,33 @@ def prompt_coach(user_prompt, api_key):
         return str(e)
 
 # --- 主界面 ---
-# 主标题
-st.markdown("""
-<h1 class="main-header">✦ AI Insight & Lingua Dashboard ✦</h1>
-""", unsafe_allow_html=True)
 
-# 副标题
+# Hero 横幅区域 - 带背景图片
 st.markdown("""
-<p class="sub-header">保持好奇，刻意练习。编程护城河消失了，但认知的护城河由你自己建造。</p>
-""", unsafe_allow_html=True)
-
-# 引用框
-st.markdown("""
-<div class="quote-box">
-    "The only way to do great work is to love what you do." — Steve Jobs
+<div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="main-header">✦ AI Insight & Lingua Dashboard ✦</h1>
+        <p class="sub-header">保持好奇，刻意练习。编程护城河消失了，但认知的护城河由你自己建造。</p>
+    </div>
 </div>
 """, unsafe_allow_html=True)
+
+# 引用框 - 带装饰图片
+col_quote, col_img = st.columns([3, 1])
+with col_quote:
+    st.markdown("""
+    <div class="quote-box">
+        <span class="quote-icon">💭</span>
+        "The only way to do great work is to love what you do." — Steve Jobs
+    </div>
+    """, unsafe_allow_html=True)
+with col_img:
+    st.markdown("""
+    <div class="decorative-img">
+        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&h=150&fit=crop" alt="AI Illustration" />
+    </div>
+    """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -607,30 +899,49 @@ st.markdown("<br>", unsafe_allow_html=True)
 tab1, tab2 = st.tabs(["📰 资讯与英语学习", "💪 Prompt 练兵场"])
 
 with tab1:
-    # 功能介绍 - 三栏布局
+    # Tab 横幅
+    st.markdown("""
+    <div class="tab-banner" style="background-image: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=300&fit=crop');">
+        <div class="tab-banner-content">
+            <h2 class="tab-banner-title">📰 AI 资讯 & 英语学习</h2>
+            <p class="tab-banner-subtitle">每日精选科技新闻，在阅读中提升英语能力</p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # 功能介绍 - 三栏布局（带图片）
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("""
-        <div class="feature-icon-card">
-            <div class="feature-icon">📖</div>
-            <div class="feature-title">阅读原文</div>
-            <div class="feature-desc">获取最新 AI 科技资讯<br>提升英语阅读能力</div>
+        <div class="feature-card-with-img">
+            <img class="feature-card-img" src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&h=200&fit=crop" alt="Reading">
+            <div class="feature-card-content">
+                <div class="feature-icon">📖</div>
+                <div class="feature-title">阅读原文</div>
+                <div class="feature-desc">获取最新 AI 科技资讯<br>提升英语阅读能力</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
     with col2:
         st.markdown("""
-        <div class="feature-icon-card">
-            <div class="feature-icon">🧠</div>
-            <div class="feature-title">AI 解析</div>
-            <div class="feature-desc">Gemini AI 深度分析<br>洞察行业趋势</div>
+        <div class="feature-card-with-img">
+            <img class="feature-card-img" src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop" alt="AI Analysis">
+            <div class="feature-card-content">
+                <div class="feature-icon">🧠</div>
+                <div class="feature-title">AI 解析</div>
+                <div class="feature-desc">Gemini AI 深度分析<br>洞察行业趋势</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
     with col3:
         st.markdown("""
-        <div class="feature-icon-card">
-            <div class="feature-icon">📚</div>
-            <div class="feature-title">词汇学习</div>
-            <div class="feature-desc">提取核心术语<br>建立专业词汇库</div>
+        <div class="feature-card-with-img">
+            <img class="feature-card-img" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=200&fit=crop" alt="Vocabulary">
+            <div class="feature-card-content">
+                <div class="feature-icon">📚</div>
+                <div class="feature-title">词汇学习</div>
+                <div class="feature-desc">提取核心术语<br>建立专业词汇库</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
     
@@ -679,18 +990,36 @@ with tab1:
                                 st.markdown("</div>", unsafe_allow_html=True)
 
 with tab2:
-    # 功能介绍
+    # Tab 横幅
     st.markdown("""
-    <div class="feature-box">
-        <h3 style="color: #d4af37; font-family: 'Playfair Display', serif; margin-bottom: 1rem;">🎯 Prompt 练兵场</h3>
-        <p style="color: #9ca3af; font-family: 'Source Sans Pro', sans-serif;">在这里输入你想问 AI 的英文指令，AI 导师会：</p>
-        <ul style="color: #9ca3af; font-family: 'Source Sans Pro', sans-serif; line-height: 1.8;">
-            <li>✏️ 点评你的 Prompt 中的语法和逻辑问题</li>
-            <li>✨ 给出优化后的专业版本</li>
-            <li>🤖 执行你的指令并给出回答</li>
-        </ul>
+    <div class="tab-banner" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=300&fit=crop');">
+        <div class="tab-banner-content">
+            <h2 class="tab-banner-title">💪 Prompt 练兵场</h2>
+            <p class="tab-banner-subtitle">磨练你的 AI 提示词技能，成为 Prompt 大师</p>
+        </div>
     </div>
     """, unsafe_allow_html=True)
+    
+    # 功能介绍 - 带图片布局
+    col_info, col_img = st.columns([2, 1])
+    with col_info:
+        st.markdown("""
+        <div class="feature-box">
+            <h3 style="color: #d4af37; font-family: 'DM Sans', sans-serif; margin-bottom: 1rem;">🎯 如何使用</h3>
+            <p style="color: #e0e0e0; font-family: 'Inter', sans-serif;">在这里输入你想问 AI 的英文指令，AI 导师会：</p>
+            <ul style="color: #d0d0d0; font-family: 'Inter', sans-serif; line-height: 2;">
+                <li>✏️ 点评你的 Prompt 中的语法和逻辑问题</li>
+                <li>✨ 给出优化后的专业版本</li>
+                <li>🤖 执行你的指令并给出回答</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    with col_img:
+        st.markdown("""
+        <div class="decorative-img" style="margin-top: 0;">
+            <img src="https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=300&h=250&fit=crop" alt="AI Assistant" />
+        </div>
+        """, unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -728,6 +1057,27 @@ with tab2:
 
 # 底部装饰
 st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+
+# 底部图片画廊
+st.markdown("""
+<div class="image-gallery">
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=300&h=150&fit=crop" alt="Robot">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=300&h=150&fit=crop" alt="AI">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=300&h=150&fit=crop" alt="Code">
+    </div>
+    <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=300&h=150&fit=crop" alt="Tech">
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="decorative-line"></div>', unsafe_allow_html=True)
+
 st.markdown("""
 <div class="footer-text">
     <p>✦ Built with <strong>Streamlit</strong> | Powered by <strong>Google Gemini</strong> | Crafted with Passion ✦</p>
