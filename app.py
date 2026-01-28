@@ -241,48 +241,68 @@ html, body, [class*="css"] {
     color: #0a0a0a !important;
 }
 
-/* Expander 样式 */
-.streamlit-expanderHeader {
+/* Expander 样式 - 整体容器 */
+[data-testid="stExpander"] {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Expander 头部/摘要部分 */
+[data-testid="stExpander"] > details {
     background: rgba(30, 30, 30, 0.9) !important;
-    border-radius: 8px;
-    border: 1px solid rgba(212, 175, 55, 0.25);
-    font-family: 'Inter', sans-serif;
-    color: #f0f0f0 !important;
-    font-size: 1rem;
+    border-radius: 8px !important;
+    border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    overflow: hidden;
 }
 
-.streamlit-expanderHeader:hover {
-    border-color: rgba(212, 175, 55, 0.5);
+[data-testid="stExpander"] > details:hover {
+    border-color: rgba(212, 175, 55, 0.5) !important;
 }
 
-/* Expander 标题文字 - 确保清晰可见 */
-.streamlit-expanderHeader p,
-.streamlit-expanderHeader span,
-[data-testid="stExpander"] summary span,
-[data-testid="stExpander"] summary p,
-[data-testid="stExpander"] [data-testid="stMarkdownContainer"] p {
+/* Expander 摘要/标题行 */
+[data-testid="stExpander"] > details > summary {
+    background: rgba(30, 30, 30, 0.9) !important;
+    padding: 1rem 1.2rem !important;
+    cursor: pointer;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+/* 确保展开箭头正常显示 */
+[data-testid="stExpander"] > details > summary > span:first-child {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Expander 标题文字 - 修复重叠问题 */
+[data-testid="stExpander"] > details > summary > span:last-child,
+[data-testid="stExpander"] > details > summary > span:last-child p {
     color: #FFD700 !important;
     font-family: 'Inter', sans-serif !important;
     font-weight: 600 !important;
     font-size: 1rem !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
 }
 
-/* Expander 内容 */
-.streamlit-expanderContent {
-    background: rgba(25, 25, 25, 0.95);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    border-top: none;
-    border-radius: 0 0 8px 8px;
+/* Expander 内容区域 */
+[data-testid="stExpander"] > details > div[data-testid="stExpanderDetails"] {
+    background: rgba(25, 25, 25, 0.95) !important;
+    border-top: 1px solid rgba(212, 175, 55, 0.15) !important;
+    padding: 1rem 1.2rem !important;
 }
 
 /* Expander 内容区域文字 */
-[data-testid="stExpander"] > div > div {
-    background: rgba(25, 25, 25, 0.95) !important;
-}
-
-[data-testid="stExpander"] > div > div p,
-[data-testid="stExpander"] > div > div span,
-[data-testid="stExpander"] > div > div li {
+[data-testid="stExpander"] > details > div p,
+[data-testid="stExpander"] > details > div span,
+[data-testid="stExpander"] > details > div li {
     color: #e8e8e8 !important;
 }
 
