@@ -255,12 +255,45 @@ html, body, [class*="css"] {
     border-color: rgba(212, 175, 55, 0.5);
 }
 
+/* Expander 标题文字 - 确保清晰可见 */
+.streamlit-expanderHeader p,
+.streamlit-expanderHeader span,
+[data-testid="stExpander"] summary span,
+[data-testid="stExpander"] summary p,
+[data-testid="stExpander"] [data-testid="stMarkdownContainer"] p {
+    color: #FFD700 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+}
+
 /* Expander 内容 */
 .streamlit-expanderContent {
     background: rgba(25, 25, 25, 0.95);
     border: 1px solid rgba(212, 175, 55, 0.15);
     border-top: none;
     border-radius: 0 0 8px 8px;
+}
+
+/* Expander 内容区域文字 */
+[data-testid="stExpander"] > div > div {
+    background: rgba(25, 25, 25, 0.95) !important;
+}
+
+[data-testid="stExpander"] > div > div p,
+[data-testid="stExpander"] > div > div span,
+[data-testid="stExpander"] > div > div li {
+    color: #e8e8e8 !important;
+}
+
+/* Expander 内链接 */
+[data-testid="stExpander"] a {
+    color: #d4af37 !important;
+    font-weight: 500;
+}
+
+[data-testid="stExpander"] a:hover {
+    color: #FFD700 !important;
 }
 
 /* Metric 样式 */
@@ -417,6 +450,25 @@ html, body, [class*="css"] {
     border: 1px solid rgba(212, 175, 55, 0.25);
     border-radius: 8px;
     color: #f0f0f0 !important;
+}
+
+.stAlert p,
+.stAlert span,
+.stAlert div,
+[data-testid="stAlert"] p,
+[data-testid="stAlert"] span {
+    color: #e8e8e8 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* st.info 信息框 */
+[data-baseweb="notification"] {
+    background: rgba(30, 30, 30, 0.95) !important;
+    border-left: 4px solid #d4af37 !important;
+}
+
+[data-baseweb="notification"] div {
+    color: #e8e8e8 !important;
 }
 
 /* 链接样式 */
